@@ -23,7 +23,10 @@ Datos públicos del Instituto Canario de Estadística sobre nuevas hipotecas con
 ## Proceso detallado
 
 ### 1. Preparación de datos
-- Se seleccionaron las columnas relevantes:
+- De los datos originales solamente e seleccionaron las columnas relevantes:
+
+![Tabla de datos general](Imagenes/1imagen.PNG)
+
   - `MEDIDASHes`: Tipo de dato (número o importe de hipoteca)
   - `TIME_PERIOD#es`: Periodo temporal
   - `FINCA_NATURALEZA#es`: Naturaleza de la finca
@@ -33,13 +36,25 @@ Datos públicos del Instituto Canario de Estadística sobre nuevas hipotecas con
 ### 2. Transformación de datos
 - Se crearon tres tablas principales:
   1. **Tabla de hechos**: Datos principales de hipotecas
-  2. **Tabla Calendario**: Para análisis temporal avanzado
-  3. **Tabla Territorio**: Para organización geográfica
+  
+  ![Tabla inicial](Imagenes/2imagen.PNG)
+  
+  3. **Tabla Calendario**: Para análisis temporal avanzado
+
+  ![Tabla Calendario](Imagenes/3imagen.PNG)
+  
+  5. **Tabla Territorio**: Para organización geográfica
+    
+  ![Tabla Territorio](Imagenes/4imagen.PNG)
+  
 
 ### 3. Modelado de datos
 - Se establecieron relaciones entre las tablas:
   - Calendario ↔ Tabla de hechos (por fecha)
   - Territorio ↔ Tabla de hechos (por ubicación)
+    
+  ![Vista de diagrama](Imagenes/5imagen.PNG)
+  
 
 ### 4. Medidas DAX
 - **Medidas básicas**:
@@ -50,6 +65,9 @@ Datos públicos del Instituto Canario de Estadística sobre nuevas hipotecas con
   - Top 3 comunidades por importe
 
 ### 5. Visualización
+  
+  ![Dashboard interactivo de hipotecas en España](Imagenes/6imagen.PNG)
+  
 - Gráficos combinados (columnas y líneas)
 - Tablas dinámicas con formato condicional
 - Elementos interactivos:
