@@ -37,7 +37,7 @@ Datos públicos del Instituto Canario de Estadística sobre nuevas hipotecas con
   - `OBS_VALUE`: Valor registrado
 
 ### 2. Transformación de datos
-- Se crearon tres tablas principales:
+- Se crearon tres tablas principales desde los datos originales:
   1. **Tabla de hechos**: Datos principales de hipotecas
   
   ![Tabla inicial](Imagenes/2imagen.PNG)
@@ -53,23 +53,51 @@ Datos públicos del Instituto Canario de Estadística sobre nuevas hipotecas con
 
 ### 3. Modelado de datos
 - Se establecieron relaciones entre las tablas:
-  - Calendario ↔ Tabla de hechos (por fecha)
-  - Territorio ↔ Tabla de hechos (por ubicación)
+  - Tabla Calendario[FECHA] → Tabla inicial[FECHA_HIPOTECA] (relación 1:*)
+  - Tabla Territorio[ID] → Tabla inicial [TERRITORIO_ID] (relación 1:*)
     
   ![Vista de diagrama](Imagenes/5imagen.PNG)
   
 
 ### 4. Medidas DAX
+Algunas ejemplos de las medidas creadas para el proyecto se pueden dividir en (las formuás están explicadas en profundidad en el proyecto):
 - **Medidas básicas**:
   - Total de hipotecas
+    
+    $$=SUM('Tabla inicial'[NUMERO_HIPOTECAS])$$
   - Año máximo/mínimo
+
+    $$=MAX(Calendario[AÑO])$$
 - **Medidas avanzadas**:
   - Crecimiento interanual
-  - Top 3 comunidades por importe
+    
+    $$=VAR AnoActual = [Total Importe]$$
 
-###  5. Visualización
+    $$VAR AnoAnterior = CALCULATE($$
 
-Podemos visulizar:
+    $$[Total Importe];$$
+
+    $$SAMEPERIODLASTYEAR(Calendario[FECHA])$$
+
+    $$)$$
+
+    $$RETURN$$
+
+    $$IF($$
+
+    $$NOT ISBLANK(AnoAnterior);$$
+
+    $$(AnoActual - AnoAnterior) / AnoAnterior;$$
+
+    $$BLANK()$$
+
+    $$)$$
+
+    $$)$$
+
+###  5. Creación del dashboard
+
+En el mismo podemos visulizar:
 - Gráficos combinados (columnas y líneas)
 - Tablas dinámicas con formato condicional
 - Elementos interactivos:
@@ -105,4 +133,4 @@ Podemos visulizar:
 ## 🔴 Conclusión
 Este proyecto demuestra habilidades integrales en el análisis de datos, abarcando desde la extracción hasta la visualización, utilizando herramientas estándar del ecosistema Microsoft.
 
-Si bien el dashboard se ha diseñado de manera sencilla de forma intencionada, ya que plataformas como Power BI o Tableau ofrecen mayores capacidades para crear visualizaciones más atractivas y eficientes, gracias a sus herramientas avanzadas de diseño.
+A tener en cuenta que el dashboard se ha diseñado de manera sencilla de forma intencionada, ya que plataformas como Power BI o Tableau ofrecen mayores capacidades para crear visualizaciones más atractivas y eficientes, gracias a sus herramientas avanzadas de diseño.
